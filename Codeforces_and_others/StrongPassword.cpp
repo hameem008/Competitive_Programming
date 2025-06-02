@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define gap ' '
+typedef long long ll;
+typedef long double lld;
+const ll infinite = INT64_MAX;
+
+void solve(int I, int T)
+{
+    ll i, j, k, a, b, c, d, m, n, p, q;
+    bool flag;
+    // solve starts
+    string str;
+    cin >> str;
+    set<char> s;
+    for (char ch = 'a'; ch <= 'z'; ch++)
+        s.insert(ch);
+    for (auto x : str)
+        s.erase(x);
+    char ch = *s.begin();
+    string ans;
+    ans.push_back(str.front());
+    if (str.size() == 1)
+    {
+        ans.push_back(ch);
+    }
+    for (i = 1; i < str.size(); i++)
+    {
+        if (str[i] == str[i - 1])
+        {
+            ans.push_back(ch);
+            for (; i < str.size(); i++)
+            {
+                ans.push_back(str[i]);
+            }
+            break;
+        }
+        else
+        {
+            ans.push_back(str[i]);
+            if (i == str.size() - 1)
+                ans.push_back(ch);
+        }
+    }
+    cout << ans << endl;
+    // solve ends
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll T = 1;
+    cin >> T;
+    for (int I = 1; I <= T; I++)
+        solve(I, T);
+    return 0;
+}

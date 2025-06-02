@@ -1,0 +1,242 @@
+[
+    {
+        "usecase": {
+            "name": "Food Donation",
+            "scenario": "A donor wants to donate food to a NGO by providing necessary information",
+            "actors": "Donor",
+            "preconditions": "The donor has an account on the platform, is logged in and a NGO or a campaign is selected.",
+            "steps": [
+                "Donor navigates to the donate section.",
+                "Donor selects food for donation.",
+                "Donor enters details about the food items.",
+                "Donor sends a request to the NGO."
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid food donation request",
+                "description": "Verify that a donor can successfully send a request to donate multiple types of food.",
+                "input": [
+                    {
+                        "name": "Biscuit",
+                        "type": "dry",
+                        "quantity": "20",
+                        "quantity unit": "packets",
+                        "expiry date": "8 December, 2025",
+                        "image": "image.jpg"
+                    },
+                    {
+                        "name": "Flour",
+                        "type": "corn",
+                        "quantity": "20",
+                        "quantity unit": "kgs",
+                        "expiry date": "8 December, 2025",
+                        "image": null
+                    }
+                ],
+                "expected": {
+                    "outcome": "Request for food donation sent successfully.",
+                    "status": "Sent successfully."
+                }
+            },
+            {
+                "name": "Valid food donation request",
+                "description": "Verify that a donor can successfully send a request to donate food.",
+                "input": [
+                    {
+                        "name": "Rice",
+                        "type": "corn",
+                        "quantity": "25",
+                        "quantity unit": "kgs",
+                        "expiry date": "8 December, 2025",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Request for food donation sent successfully.",
+                    "status": "Sent successfully."
+                }
+            },
+            {
+                "name": "Invalid food donation request",
+                "description": "Verify that the system handles invalid name input.",
+                "input": [
+                    {
+                        "name": "",
+                        "type": "corn",
+                        "quantity": "25",
+                        "quantity unit": "kgs",
+                        "expiry date": "8 December, 2025",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Name of the food is missing.",
+                    "status": "Send failed."
+                }
+            },
+            {
+                "name": "Invalid food donation request",
+                "description": "Verify that the system handles invalid type input.",
+                "input": [
+                    {
+                        "name": "Rice",
+                        "type": "",
+                        "quantity": "25",
+                        "quantity unit": "kgs",
+                        "expiry date": "8 December, 2025",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Type of the food is missing.",
+                    "status": "Send failed."
+                }
+            },
+            {
+                "name": "Invalid food donation request",
+                "description": "Verify that the system handles invalid quantity unit input.",
+                "input": [
+                    {
+                        "name": "Rice",
+                        "type": "corn",
+                        "quantity": "25",
+                        "quantity unit": "liters",
+                        "expiry date": "8 December, 2025",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Invalid quantity unit.",
+                    "status": "Send failed."
+                }
+            },
+            {
+                "name": "Invalid food donation request",
+                "description": "Verify that the system handles invalid expiry date input.",
+                "input": [
+                    {
+                        "name": "Rice",
+                        "type": "corn",
+                        "quantity": "25",
+                        "quantity unit": "kgs",
+                        "expiry date": "",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Expiry date of the food is missing.",
+                    "status": "Send failed."
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Cloth Donation",
+            "scenario": "A donor wants to donate cloth to a NGO by providing necessary information",
+            "actors": "Donor",
+            "preconditions": "The donor has an account on the platform, is logged in and a NGO or a campaign is selected.",
+            "steps": [
+                "Donor navigates to the donate section.",
+                "Donor selects cloth for donation.",
+                "Donor enters details about the cloth items.",
+                "Donor sends a request to the NGO."
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid cloth donation request.",
+                "description": "Verify that a donor can successfully send a request to donate multiple types of cloth.",
+                "input": [
+                    {
+                        "type": "winter",
+                        "gender": "male",
+                        "quantity": "20",
+                        "age range": "14-19",
+                        "image": "image.jpg"
+                    },
+                    {
+                        "type": "winter",
+                        "gender": "male",
+                        "quantity": "20",
+                        "age range": "25-50",
+                        "image": null
+                    }
+                ],
+                "expected": {
+                    "outcome": "Request for cloth donation sent successfully.",
+                    "status": "Sent successfully."
+                }
+            },
+            {
+                "name": "Valid cloth donation request.",
+                "description": "Verify that a donor can successfully send a request to donate cloth.",
+                "input": [
+                    {
+                        "type": "summer",
+                        "gender": "female",
+                        "quantity": "25",
+                        "age range": "20-30",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Request for cloth donation sent successfully.",
+                    "status": "Sent successfully."
+                }
+            },
+            {
+                "name": "Invalid cloth donation request.",
+                "description": "Verify that the system handles invalid type input.",
+                "input": [
+                    {
+                        "type": "",
+                        "gender": "male",
+                        "quantity": "20",
+                        "age range": "14-19",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Type of the cloth is missing.",
+                    "status": "Send failed."
+                }
+            },
+            {
+                "name": "Invalid cloth donation request.",
+                "description": "Verify that the system handles invalid gender input.",
+                "input": [
+                    {
+                        "type": "winter",
+                        "gender": "",
+                        "quantity": "20",
+                        "age range": "14-19",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Gender not specified for the cloth donation.",
+                    "status": "Send failed."
+                }
+            },
+            {
+                "name": "Invalid cloth donation request.",
+                "description": "Verify that the system handles invalid age range input.",
+                "input": [
+                    {
+                        "type": "winter",
+                        "gender": "male",
+                        "quantity": "20",
+                        "age range": "",
+                        "image": "image.jpg"
+                    }
+                ],
+                "expected": {
+                    "outcome": "Age range not set for the cloth donation.",
+                    "status": "Send failed."
+                }
+            }
+        ]
+    }
+]

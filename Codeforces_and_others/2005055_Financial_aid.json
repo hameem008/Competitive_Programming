@@ -1,0 +1,178 @@
+{
+    "usecase": {
+        "name": "Apply for financial aid",
+        "scenario": "An user requests for financial aid for a specific course",
+        "actors": "User",
+        "preconditions": "User has an account and the account is logged in",
+        "steps": [
+            "User clicks on a paid course to enroll it",
+            "User clicks on Financial aid available",
+            "User provides the required information",
+            "User clicks on Next button at the bottom of the form",
+            "User provides the required information and response",
+            "User clicks on Review button at the bottom"
+        ]
+    },
+    "testcases": [
+        {
+            "name": "All the required information provided in the first step of a financial aid request",
+            "description": "User provides all the reuired information for the first step of a financial aid request",
+            "input": {
+                "Level of education": "College degree",
+                "Annual income": {
+                    "Amount of annual income": "1000",
+                    "Currency": "$ CAD"
+                },
+                "Employment status": "Part time",
+                "Reason for applying": "My father have passed last year. So currently I don't have a reliable income source. (must be above 150 wards)"
+            },
+            "expected": {
+                "outcome": "Information forwarded to the next step",
+                "status": "Approved"
+            }
+        },
+        {
+            "name": "Some of the required information provided in the first step of a financial aid request",
+            "description": "User provides some of the reuired information for the first step of a financial aid request",
+            "input": {
+                "Level of education": "",
+                "Annual income": {
+                    "Amount of annual income": "1000",
+                    "Currency": "$ CAD"
+                },
+                "Employment status": "Part time",
+                "Reason for applying": "My father have passed last year. So currently I don't have a reliable income source. (must be above 150 wards)"
+            },
+            "expected": {
+                "outcome": "Level of education must be provided",
+                "status": "Rejected"
+            }
+        },
+        {
+            "name": "Some of the required information provided in the first step of a financial aid request",
+            "description": "User provides some of the reuired information for the first step of a financial aid request",
+            "input": {
+                "Level of education": "College degree",
+                "Annual income": {
+                    "Amount of annual income": "",
+                    "Currency": ""
+                },
+                "Employment status": "Part time",
+                "Reason for applying": "My father have passed last year. So currently I don't have a reliable income source. (must be above 150 wards)"
+            },
+            "expected": {
+                "outcome": "Annual income must be provided",
+                "status": "Rejected"
+            }
+        },
+        {
+            "name": "Some of the required information provided in the first step of a financial aid request",
+            "description": "User provides some of the reuired information for the first step of a financial aid request",
+            "input": {
+                "Level of education": "College degree",
+                "Annual income": {
+                    "Amount of annual income": "1000",
+                    "Currency": "$ CAD"
+                },
+                "Employment status": "",
+                "Reason for applying": "My father have passed last year. So currently I don't have a reliable income source. (must be above 150 wards)"
+            },
+            "expected": {
+                "outcome": "Employment status must be provided",
+                "status": "Rejected"
+            }
+        },
+        {
+            "name": "Some of the required information provided in the first step of a financial aid request",
+            "description": "User provides some of the reuired information for the first step of a financial aid request",
+            "input": {
+                "Level of education": "College degree",
+                "Annual income": {
+                    "Amount of annual income": "1000",
+                    "Currency": "$ CAD"
+                },
+                "Employment status": "Part time",
+                "Reason for applying": ""
+            },
+            "expected": {
+                "outcome": "Reason for applying must be provided",
+                "status": "Rejected"
+            }
+        },
+        {
+            "name": "All the required information provided in the second step",
+            "description": "User provides all the reuired information for the second step of a financial aid request",
+            "input": {
+                "Pay for your selected course": "10$",
+                "Reason for selecting the course": "It will help me to build a suitable career. (must be above 150 wards)",
+                "I'm sharing accurate information on my application": true,
+                "I commit to finishing my Coursera course": true,
+                "Type the required sentence": "I agree to the terms above"
+            },
+            "expected": {
+                "outcome": "Information forwarded for reviewing",
+                "status": "Approved"
+            }
+        },
+        {
+            "name": "All the required information provided in the second step",
+            "description": "User provides all the reuired information for the second step of a financial aid request",
+            "input": {
+                "Pay for your selected course": "0$",
+                "Reason for selecting the course": "It will help me to build a suitable career. (must be above 150 wards)",
+                "I'm sharing accurate information on my application": true,
+                "I commit to finishing my Coursera course": true,
+                "Type the required sentence": "I agree to the terms above"
+            },
+            "expected": {
+                "outcome": "Information forwarded for reviewing",
+                "status": "Approved"
+            }
+        },
+        {
+            "name": "Some of the required information provided in the second step",
+            "description": "User provides some of the reuired information for the second step of a financial aid request",
+            "input": {
+                "Pay for your selected course": "10$",
+                "Reason for selecting the course": "",
+                "I'm sharing accurate information on my application": true,
+                "I commit to finishing my Coursera course": true,
+                "Type the required sentence": "I agree to the terms above"
+            },
+            "expected": {
+                "outcome": "Reason for selecting the course must be provided",
+                "status": "Rejected"
+            }
+        },
+        {
+            "name": "Some of the required information provided in the second step",
+            "description": "User provides some of the reuired information for the second step of a financial aid request",
+            "input": {
+                "Pay for your selected course": "10$",
+                "Reason for selecting the course": "It will help me to build a suitable career. (must be above 150 wards)",
+                "I'm sharing accurate information on my application": false,
+                "I commit to finishing my Coursera course": true,
+                "Type the required sentence": "I agree to the terms above"
+            },
+            "expected": {
+                "outcome": "All checkboxes must checked",
+                "status": "Rejected"
+            }
+        },
+        {
+            "name": "Some of the required information provided in the second step",
+            "description": "User provides some of the reuired information for the second step of a financial aid request",
+            "input": {
+                "Pay for your selected course": "10$",
+                "Reason for selecting the course": "It will help me to build a suitable career. (must be above 150 wards)",
+                "I'm sharing accurate information on my application": true,
+                "I commit to finishing my Coursera course": true,
+                "Type the required sentence": ""
+            },
+            "expected": {
+                "outcome": "Required sentence must be written",
+                "status": "Rejected"
+            }
+        }
+    ]
+}
