@@ -1420,3 +1420,10 @@ ll HLD_query(ll a, ll b)
     }
     return qr;
 }
+
+void HLD_update(ll node, ll val)
+{
+    ll sg_node = info[node].first;
+    ll pos = info[node].second;
+    vec_of_sg[sg_node].update(pos, val);
+}
