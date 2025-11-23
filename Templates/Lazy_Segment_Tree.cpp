@@ -9,11 +9,14 @@ private:
     ll tla = 0, tra = 0;
     void push(ll v, ll tl, ll tm, ll tr)
     {
-        t[v * 2] += (tm - tl + 1) * lazy[v];
-        lazy[v * 2] += lazy[v];
-        t[v * 2 + 1] += (tr - tm) * lazy[v];
-        lazy[v * 2 + 1] += lazy[v];
-        lazy[v] = 0;
+        if (lazy[v] != 0)
+        {
+            t[v * 2] += (tm - tl + 1) * lazy[v];
+            lazy[v * 2] += lazy[v];
+            t[v * 2 + 1] += (tr - tm) * lazy[v];
+            lazy[v * 2 + 1] += lazy[v];
+            lazy[v] = 0;
+        }
     }
     void build(vector<T> &a, ll v, ll tl, ll tr)
     {

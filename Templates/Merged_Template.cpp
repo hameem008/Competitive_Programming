@@ -249,6 +249,42 @@ ll nCr(ll n, ll r, ll mod)
     return ans;
 }
 
+// fenwick tree
+template <class T>
+class fenwick_tree
+{
+private:
+    int N;
+    vector<T> bit;
+    T sum(int r)
+    {
+        T ret = 0;
+        for (; r >= 0; r = (r & (r + 1)) - 1)
+            ret += bit[r];
+        return ret;
+    }
+
+public:
+    fenwick_tree() {}
+    fenwick_tree(vector<T> &a) { build(a); }
+    void build(vector<T> &a)
+    {
+        N = a.size();
+        bit.assign(N, 0);
+        for (int i = 0; i < a.size(); i++)
+            add(i, a[i]);
+    }
+    T sum(int l, int r)
+    {
+        return sum(r) - sum(l - 1);
+    }
+    void add(int pos, int add_val)
+    {
+        for (; pos < N; pos = pos | (pos + 1))
+            bit[pos] += add_val;
+    }
+};
+
 // segment tree
 template <class T>
 class segment_tree
@@ -358,11 +394,14 @@ private:
     ll tla = 0, tra = 0;
     void push(ll v, ll tl, ll tm, ll tr)
     {
-        t[v * 2] += (tm - tl + 1) * lazy[v];
-        lazy[v * 2] += lazy[v];
-        t[v * 2 + 1] += (tr - tm) * lazy[v];
-        lazy[v * 2 + 1] += lazy[v];
-        lazy[v] = 0;
+        if (lazy[v] != 0)
+        {
+            t[v * 2] += (tm - tl + 1) * lazy[v];
+            lazy[v * 2] += lazy[v];
+            t[v * 2 + 1] += (tr - tm) * lazy[v];
+            lazy[v * 2 + 1] += lazy[v];
+            lazy[v] = 0;
+        }
     }
     void build(vector<T> &a, ll v, ll tl, ll tr)
     {
