@@ -3,7 +3,7 @@ class segment_tree
 {
 private:
     ll N = 0;
-    T *t;
+    vector<T> t;
     ll root = 1;
     ll tla = 0, tra = 0;
     T combine(T a, T b)
@@ -30,8 +30,8 @@ private:
     {
         if (l > r)
             return 0;
-        // for min--> return INT32_MAX;
-        // for max--> return INT32_MIN;
+        // for min--> return INT64_MAX;
+        // for max--> return INT64_MIN;
         // for gcd--> retyrn 0;
         // for xor--> return 0;
         if (l == tl && r == tr)
@@ -66,11 +66,10 @@ public:
     }
     void build(vector<T> &a)
     {
-        if (N)
-            clear();
+        clear();
         N = a.size() + 1;
         tla = 0, tra = a.size() - 1;
-        t = new T[4 * N];
+        t.assign(4 * N, 0);
         build(a, 1, tla, tra);
     }
     T query(ll l, ll r)
@@ -83,13 +82,11 @@ public:
     }
     void clear()
     {
-        if (N)
-            delete[] t;
+        t.clear();
         N = 0, tra = 0, tla = 0;
     }
     ~segment_tree()
     {
-        if (N)
-            clear();
+        clear();
     }
 };

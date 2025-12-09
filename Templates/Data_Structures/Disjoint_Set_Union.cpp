@@ -1,35 +1,34 @@
 class dsu
 {
 private:
-    ll N = 0;
-    ll *parrents;
-    ll *ranks;
+    int N = 0;
+    vector<int> parrents;
+    vector<int> ranks;
 
 public:
-    dsu(ll n)
+    dsu(int n)
     {
         build(n);
     }
-    void build(ll n)
+    void build(int n)
     {
-        if (N)
-            clear();
+        clear();
         N = n;
-        parrents = new ll[n + 1];
-        ranks = new ll[n + 1];
-        for (ll i = 1; i <= n; i++)
+        parrents.assign(n + 1, 0);
+        ranks.assign(n + 1, 0);
+        for (int i = 1; i <= n; i++)
         {
             parrents[i] = i;
             ranks[i] = 0;
         }
     }
-    ll Find(ll v)
+    int Find(int v)
     {
         if (v == parrents[v])
             return v;
         return parrents[v] = Find(parrents[v]);
     }
-    void Union(ll a, ll b)
+    void Union(int a, int b)
     {
         a = Find(a);
         b = Find(b);
@@ -44,16 +43,12 @@ public:
     }
     void clear()
     {
-        if (N)
-        {
-            delete[] parrents;
-            delete[] ranks;
-        }
+        parrents.clear();
+        ranks.clear();
         N = 0;
     }
     ~dsu()
     {
-        if (N)
-            clear();
+        clear();
     }
 };
