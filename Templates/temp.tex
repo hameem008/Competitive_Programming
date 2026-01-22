@@ -1,0 +1,37 @@
+\documentclass[a4paper,landscape,20pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{fancyhdr} % For custom headers and footers
+\geometry{left=0.5cm,right=0.5cm,top=2cm,bottom=0.5cm}
+
+% Custom header and footer settings
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[L]{BUET\_NullPointer} % Left header
+\fancyhead[R]{\thepage} % Right header for page number
+
+% lstset for C++ code formatting
+\lstset{ %
+    language=C++,                 % Set language
+    basicstyle=\ttfamily\large,    % Code font style and size
+    columns=fullflexible,          % Spaces out letters correctly
+    keepspaces=true,               % Keeps all spaces and tabs
+    breaklines=true,               % Automatic line breaking
+    showstringspaces=false         % Do not show spaces in strings
+}
+
+\begin{document}
+
+\begin{multicols}{3}
+
+\section*{Let's Code}
+
+\begin{lstlisting}
+
+\end{lstlisting}
+
+\end{multicols}
+
+\end{document}

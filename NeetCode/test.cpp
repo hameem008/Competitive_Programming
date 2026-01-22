@@ -11,12 +11,7 @@ void solve(int I, int T)
     ll i, j, k, a, b, c, d, m, n, p, q;
     bool flag;
     // solve starts
-    set<int> s;
-    s.insert(10);
-    auto it = s.begin();
-    (*it)++;
-    it = s.begin();
-    cout << *it << endl;
+    
     // solve ends
 }
 
@@ -27,7 +22,7 @@ int main()
     cout.tie(NULL);
 
     ll T = 1;
-    // cin >> T;
+    cin >> T;
     for (int I = 1; I <= T; I++)
         solve(I, T);
     return 0;
