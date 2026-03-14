@@ -6,6 +6,54 @@ typedef long long ll;
 typedef long double lld;
 const ll infinite = INT64_MAX;
 
+vector<ll> parrents_dijkstra;
+vector<ll> distance_dijkstra;
+void dijkstra(vector<vector<pair<ll, ll>>> &graph, ll source)
+{
+    ll n = graph.size();
+    parrents_dijkstra.clear();
+    distance_dijkstra.clear();
+    parrents_dijkstra.assign(n, -1);
+    distance_dijkstra.assign(n, 99999999);
+    distance_dijkstra[source] = 0;
+    parrents_dijkstra[source] = source;
+    vector<bool> isDone(n, false);
+    ll cost;
+    set<pair<ll, ll>> pq;
+    pq.insert({distance_dijkstra[source], source});
+    while (pq.size())
+    {
+        pair<ll, ll> p = *pq.begin();
+        pq.erase(pq.begin());
+        cost = p.first;
+        if (isDone[p.second])
+            continue;
+        isDone[p.second] = true;
+        for (auto x : graph[p.second])
+        {
+            if (cost + x.second < distance_dijkstra[x.first])
+            {
+                distance_dijkstra[x.first] = cost + x.second;
+                parrents_dijkstra[x.first] = p.second;
+                pq.insert({distance_dijkstra[x.first], x.first});
+            }
+        }
+    }
+}
+vector<ll> shortest_path_dijkstra(ll source, ll destination)
+{
+    vector<ll> path;
+    ll node = destination;
+    while (node != source)
+    {
+        path.push_back(node);
+        node = parrents_dijkstra[node];
+    }
+    path.push_back(source);
+    reverse(path.begin(), path.end());
+    return path;
+}
+
 void solve(int I, int T)
 {
     ll i, j, k, a, b, c, d, m, n, p, q;
