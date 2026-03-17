@@ -6,12 +6,25 @@ typedef long long ll;
 typedef long double lld;
 const ll infinite = INT64_MAX;
 
+class Solution
+{
+public:
+    int climbStairs(int n)
+    {
+        vector<int> dp(n + 8, 0);
+        dp[0] = 1;
+        for (int i = 0; i <= n; i++)
+            dp[i + 1] += dp[i], dp[i + 2] += dp[i];
+        return dp[n];
+    }
+};
+
 void solve(int I, int T)
 {
     ll i, j, k, a, b, c, d, m, n, p, q;
     bool flag;
     // solve starts
-    
+
     // solve ends
 }
 
