@@ -9,27 +9,28 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int hammingWeight(uint32_t n)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        int cnt = 0;
+        uint32_t mask = 01;
+        while (n)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
+            if (n & mask)
+                cnt++;
+            n /= 2;
         }
-        return *max_element(dp.begin(), dp.end());
+        return cnt;
     }
 };
 
 void solve(int I, int T)
 {
-    ll i, j, k, a, b, c, d, m, n, p, q;
+    ll i, j, k, a, b, c, d, m, p, q;
     bool flag;
     // solve starts
-
+    uint32_t n = 00011011;
+    Solution sl;
+    cout << sl.hammingWeight(n) << endl;
     // solve ends
 }
 

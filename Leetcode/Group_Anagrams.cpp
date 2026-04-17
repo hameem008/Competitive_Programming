@@ -9,23 +9,28 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    bool isAnagram(string s, string t)
+    vector<int> cnt(string &str)
     {
-        vector<int> mp(26, 0);
-        for (auto x : s)
+        vector<int> ret(26, 0);
+        for (int i = 0; i < str.size(); i++)
         {
-            mp[x-'a']++;
+            ret[str[i] - 'a']++;
         }
-        for (auto x : t)
+        return ret;
+    }
+    vector<vector<string>> groupAnagrams(vector<string> &strs)
+    {
+        vector<vector<string>> ans;
+        map<vector<int>, vector<string>> mp;
+        for (int i = 0; i < strs.size(); i++)
         {
-            mp[x-'a']--;
+            mp[cnt(strs[i])].push_back(strs[i]);
         }
         for (auto x : mp)
         {
-            if (x != 0)
-                return false;
+            ans.push_back(x.second);
         }
-        return true;
+        return ans;
     }
 };
 
@@ -34,11 +39,7 @@ void solve(int I, int T)
     ll i, j, k, a, b, c, d, m, n, p, q;
     bool flag;
     // solve starts
-    string s, t;
-    cin >> s;
-    cin >> t;
-    Solution sl;
-    cout << sl.isAnagram(s, t);
+
     // solve ends
 }
 
@@ -49,7 +50,7 @@ int main()
     cout.tie(NULL);
 
     ll T = 1;
-    // cin >> T;
+    cin >> T;
     for (int I = 1; I <= T; I++)
         solve(I, T);
     return 0;

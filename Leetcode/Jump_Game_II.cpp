@@ -9,18 +9,19 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int jump(vector<int> &nums)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        int l = 0, r = 0, res = 0;
+        while (r < nums.size() - 1)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
+            int far = 0;
+            res++;
+            for (int i = l; i <= r; i++)
+                far = max(far, i + nums[i]);
+            l = r + 1;
+            r = far;
         }
-        return *max_element(dp.begin(), dp.end());
+        return res;
     }
 };
 

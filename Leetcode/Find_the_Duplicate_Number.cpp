@@ -9,18 +9,23 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int findDuplicate(vector<int> &nums)
     {
-        vector<int> dp(nums.size(), 1);
+        int ret = -1;
         for (int i = 0; i < nums.size(); i++)
         {
-            for (int j = i + 1; j < nums.size(); j++)
+            int val = abs(nums[i]);
+            if (nums[val] < 0)
             {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
+                ret = val;
+                break;
             }
+            else
+                nums[val] *= -1;
         }
-        return *max_element(dp.begin(), dp.end());
+        for (int i = 0; i < nums.size(); i++)
+            nums[i] = abs(nums[i]);
+        return ret;
     }
 };
 

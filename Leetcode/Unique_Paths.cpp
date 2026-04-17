@@ -9,18 +9,18 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int uniquePaths(int m, int n)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
-        {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
-        }
-        return *max_element(dp.begin(), dp.end());
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        dp[0][0] = 1;
+        for (int i = 0; i < m; i++)
+            dp[i][0] = 1;
+        for (int i = 0; i < n; i++)
+            dp[0][i] = 1;
+        for (int i = 1; i < m; i++)
+            for (int j = 1; j < n; j++)
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+        return dp[m - 1][n - 1];
     }
 };
 

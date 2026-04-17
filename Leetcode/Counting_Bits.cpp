@@ -9,18 +9,20 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    vector<int> countBits(int n)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        if (n == 0)
+            return vector<int>(1, 0);
+        vector<int> dp(n + 1, 0);
+        dp[1] = 1;
+        int div = 4;
+        for (int i = 2; i <= n; i++)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
+            if (div == i)
+                div *= 2;
+            dp[i] = 1 + dp[i % (div / 2)];
         }
-        return *max_element(dp.begin(), dp.end());
+        return dp;
     }
 };
 
@@ -29,7 +31,10 @@ void solve(int I, int T)
     ll i, j, k, a, b, c, d, m, n, p, q;
     bool flag;
     // solve starts
-
+    Solution sl;
+    for (auto x : sl.countBits(16))
+        cout << x << gap;
+    cout << endl;
     // solve ends
 }
 

@@ -9,18 +9,27 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    bool isNStraightHand(vector<int> &hand, int groupSize)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        map<int, int> freq;
+        for (auto x : hand)
+            freq[x]++;
+        while (freq.size())
         {
-            for (int j = i + 1; j < nums.size(); j++)
+            int limit = groupSize;
+            int curr = freq.begin()->first;
+            while (limit--)
             {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
+                auto it = freq.find(curr);
+                if (it == freq.end())
+                    return false;
+                it->second--;
+                if (it->second == 0)
+                    freq.erase(it);
+                curr++;
             }
         }
-        return *max_element(dp.begin(), dp.end());
+        return true;
     }
 };
 

@@ -15,43 +15,25 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-ListNode *vector_to_list(vector<int> &v)
-{
-    ListNode *it = new ListNode();
-    ListNode *ans = it;
-    for (auto x : v)
-    {
-        ListNode *new_node = new ListNode(x, nullptr);
-        it->next = new_node;
-        it = it->next;
-    }
-    ans = ans->next;
-    return ans;
-}
-
-void print_list(ListNode *head)
-{
-    ListNode *it = head;
-    while (it != nullptr)
-    {
-        cout << it->val << gap;
-        it = it->next;
-    }
-}
-
 class Solution
 {
 public:
-    ListNode *removeNthFromEnd(ListNode *head, int n)
+    ListNode *reverseList(ListNode *head)
     {
-        ListNode *it = head;
-        int cnt = 0;
-        while (it != nullptr)
+        if (head == nullptr)
+            return head;
+        ListNode *new_nxt = nullptr;
+        ListNode *curr = head;
+        ListNode *nxt = head->next;
+        while (nxt != nullptr)
         {
-            cnt++;
-            it = it->next;
+            curr->next = new_nxt;
+            new_nxt = curr;
+            curr = nxt;
+            nxt = curr->next;
         }
-        int pos = cnt - n;
+        curr->next = new_nxt;
+        return curr;
     }
 };
 
@@ -71,7 +53,7 @@ int main()
     cout.tie(NULL);
 
     ll T = 1;
-    // cin >> T;
+    cin >> T;
     for (int I = 1; I <= T; I++)
         solve(I, T);
     return 0;

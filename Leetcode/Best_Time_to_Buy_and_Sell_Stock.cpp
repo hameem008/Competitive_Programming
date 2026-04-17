@@ -9,18 +9,16 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int maxProfit(vector<int> &prices)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        int ans = 0;
+        int min_price = INT32_MAX;
+        for (auto x : prices)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
+            min_price = min(x, min_price);
+            ans = max(ans, x - min_price);
         }
-        return *max_element(dp.begin(), dp.end());
+        return ans;
     }
 };
 

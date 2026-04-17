@@ -9,18 +9,24 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int lastStoneWeight(vector<int> &stones)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        priority_queue<int> pq;
+        for (auto x : stones)
+            pq.push(x);
+        while (pq.size() > 1)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
+            int a = pq.top();
+            pq.pop();
+            a -= pq.top();
+            pq.pop();
+            if (a)
+                pq.push(a);
         }
-        return *max_element(dp.begin(), dp.end());
+        if (pq.size())
+            return pq.top();
+        else
+            return 0;
     }
 };
 

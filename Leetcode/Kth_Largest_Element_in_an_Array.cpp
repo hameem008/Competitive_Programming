@@ -9,18 +9,19 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int findKthLargest(vector<int> &nums, int k)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        auto cmp = [](int &a, int &b)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
-        }
-        return *max_element(dp.begin(), dp.end());
+            return a < b;
+        };
+        priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
+        for (auto x : nums)
+            pq.push(x);
+        k--;
+        while (k--)
+            pq.pop();
+        return pq.top();
     }
 };
 

@@ -9,18 +9,13 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int climbStairs(int n)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
-        {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
-        }
-        return *max_element(dp.begin(), dp.end());
+        vector<long long int> dp(n + 8, 0);
+        dp[0] = 1;
+        for (int i = 0; i <= n; i++)
+            dp[i + 1] += dp[i], dp[i + 2] += dp[i];
+        return dp[n];
     }
 };
 

@@ -6,21 +6,26 @@ typedef long long ll;
 typedef long double lld;
 const ll infinite = INT64_MAX;
 
-class Solution
+class KthLargest
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int k;
+    priority_queue<int, vector<int>, greater<int>> pq;
+    KthLargest(int k, vector<int> &nums)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
-        {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
-        }
-        return *max_element(dp.begin(), dp.end());
+        this->k = k;
+        for (auto x : nums)
+            pq.push(x);
+        while (pq.size() > k)
+            pq.pop();
+    }
+
+    int add(int val)
+    {
+        pq.push(val);
+        while (pq.size() > k)
+            pq.pop();
+        return pq.top();
     }
 };
 

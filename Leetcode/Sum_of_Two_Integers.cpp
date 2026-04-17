@@ -9,18 +9,15 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    int getSum(int a, int b)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        while (b)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
+            int carry = (a & b) << 1;
+            a = a ^ b;
+            b = carry;
         }
-        return *max_element(dp.begin(), dp.end());
+        return a;
     }
 };
 

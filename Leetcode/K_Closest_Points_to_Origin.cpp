@@ -9,18 +9,22 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    vector<vector<int>> kClosest(vector<vector<int>> &points, int k)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
+        auto cmp = [](vector<int> &a, vector<int> &b)
         {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
-            }
+            return (a[0] * a[0] + a[1] * a[1]) > (b[0] * b[0] + b[1] * b[1]);
+        };
+        priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
+        for (auto x : points)
+            pq.push(x);
+        vector<vector<int>> ret;
+        while (k--)
+        {
+            ret.push_back(pq.top());
+            pq.pop();
         }
-        return *max_element(dp.begin(), dp.end());
+        return ret;
     }
 };
 

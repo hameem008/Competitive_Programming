@@ -9,18 +9,20 @@ const ll infinite = INT64_MAX;
 class Solution
 {
 public:
-    int lengthOfLIS(vector<int> &nums)
+    bool mergeTriplets(vector<vector<int>> &triplets, vector<int> &target)
     {
-        vector<int> dp(nums.size(), 1);
-        for (int i = 0; i < nums.size(); i++)
-        {
-            for (int j = i + 1; j < nums.size(); j++)
+        int cnt = 0;
+        for (int ind = 0; ind <= 2; ind++)
+            for (auto x : triplets)
             {
-                if (nums[i] < nums[j])
-                    dp[j] = max(dp[j], dp[i] + 1);
+                vector<int> v = {max(target[0], x[0]), max(target[1], x[1]), max(target[2], x[2])};
+                if (x[ind] == target[ind] && v == target)
+                {
+                    cnt++;
+                    break;
+                }
             }
-        }
-        return *max_element(dp.begin(), dp.end());
+        return cnt == 3;
     }
 };
 
